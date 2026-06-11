@@ -1,4 +1,4 @@
-const { add, subtract, multiply, divide, performOperation } = require('../calc');
+const { add, subtract, multiply, divide, modulo, power, squareRoot, performOperation } = require('../calc');
 
 describe('Calculator core functions', () => {
   test('Addition: 2 + 3 = 5', () => {
@@ -34,8 +34,35 @@ describe('Calculator core functions', () => {
     expect(() => performOperation(1, '/', 0)).toThrow('Division by zero');
   });
 
+  test('Modulo: 5 % 2 = 1', () => {
+    expect(modulo(5, 2)).toBe(1);
+    const res = performOperation(5, '%', 2);
+    expect(res.result).toBe(1);
+    expect(res.operation).toBe('Modulo');
+  });
+
+  test('Modulo by zero should throw', () => {
+    expect(() => modulo(1, 0)).toThrow('Modulo by zero');
+    expect(() => performOperation(1, '%', 0)).toThrow('Modulo by zero');
+  });
+
+  test('Power: 2 ^ 3 = 8 and fractional exponents', () => {
+    expect(power(2, 3)).toBe(8);
+    const res = performOperation(2, '^', 3);
+    expect(res.result).toBe(8);
+    expect(res.operation).toBe('Power');
+
+    // fractional exponent
+    expect(power(9, 0.5)).toBeCloseTo(3);
+  });
+
+  test('Square root: sqrt(16) = 4 and negative input throws', () => {
+    expect(squareRoot(16)).toBe(4);
+    expect(() => squareRoot(-4)).toThrow('Square root of negative number');
+  });
+
   test('Unknown operator should throw', () => {
-    expect(() => performOperation(1, '^', 2)).toThrow("Unknown operator '^'");
+    expect(() => performOperation(1, '@', 2)).toThrow("Unknown operator '@'");
   });
 
   test('Supports decimal numbers', () => {
