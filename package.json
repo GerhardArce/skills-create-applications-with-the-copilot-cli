@@ -1,0 +1,23 @@
+{
+  "name": "cli-calculator",
+  "version": "1.0.0",
+  "description": "A simple command-line calculator supporting basic arithmetic operations",
+  "main": "src/index.js",
+  "bin": {
+    "calc": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "calculator",
+    "cli",
+    "arithmetic"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
